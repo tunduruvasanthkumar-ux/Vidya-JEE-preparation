@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vidya - Your JEE Preparation Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2A5CAA;
+            --secondary: #FF6B35;
+            --accent: #00C9B7;
+            --light: #F8F9FA;
+            --dark: #212529;
+            --gray: #6C757D;
+            --success: #28A745;
+            --warning: #FFC107;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f7fb;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            color: var(--primary);
+            font-size: 28px;
+        }
+        
+        .logo-text {
+            font-family: 'Roboto Slab', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo-subtext {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: -5px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--primary);
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        /* Main Content */
+        .hero {
+            padding: 40px 0;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 30px;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        
+        .hero-text {
+            flex: 1;
+        }
+        
+        .hero-text h1 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .hero-text p {
+            font-size: 18px;
+            color: var(--gray);
+            margin-bottom: 25px;
+        }
+        
+        .highlight {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .ai-guide {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            flex: 1;
+            border-left: 5px solid var(--accent);
+        }
+        
+        .ai-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .ai-icon {
+            background-color: var(--accent);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .ai-header h3 {
+            color: var(--dark);
+            font-size: 22px;
+        }
+        
+        .ai-message {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .ai-message p {
+            margin-bottom: 10px;
+        }
+        
+        .ai-date {
+            font-size: 14px;
+            color: var(--gray);
+            text-align: right;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            background-color: #1d4a8a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e55a2b;
+        }
+        
+        /* Dashboard */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .dashboard-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .card-title {
+            font-size: 20px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background-color: rgba(42, 92, 170, 0.1);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .progress-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: conic-gradient(var(--accent) 75%, #e0e0e0 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .progress-circle::before {
+            content: attr(data-progress)'%';
+            position: absolute;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .calendar-card .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            text-align: center;
+        }
+        
+        .calendar-day {
+            padding: 8px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+        
+        .calendar-day.header {
+            font-weight: 600;
+            color: var(--primary);
+            background-color: #f0f7ff;
+        }
+        
+        .calendar-day.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .calendar-day.today {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .notes-list {
+            list-style: none;
+        }
+        
+        .notes-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .notes-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .subject-tag {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .physics { background-color: rgba(255, 107, 53, 0.1); color: var(--secondary); }
+        .chemistry { background-color: rgba(0, 201, 183, 0.1); color: var(--accent); }
+        .maths { background-color: rgba(42, 92, 170, 0.1); color: var(--primary); }
+        
+        .schedule-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .time {
+            font-weight: 600;
+            color: var(--primary);
+            min-width: 70px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text h1 {
+                font-size: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-text h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div>
+                    <div class="logo-text">VIDYA</div>
+                    <div class="logo-subtext">JEE Preparation Assistant</div>
+                </div>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="#"><i class="fas fa-book"></i> Daily Notes</a></li>
+                    <li><a href="#"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
+                    <li><a href="#"><i class="fas fa-tasks"></i> Schedule</a></li>
+                    <li><a href="#"><i class="fas fa-lightbulb"></i> Tips</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-profile">
+                <div class="profile-pic">JS</div>
+                <span>JEE Student</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Welcome to <span class="highlight">Vidya</span> - Your AI JEE Preparation Assistant</h1>
+                <p>Starting from today, I'll guide you through your JEE Mains & Advanced preparation with daily notes, personalized schedules, study tips, and progress tracking. Let's make every day count!</p>
+                <a href="#" class="btn">View Today's Schedule</a>
+                <a href="#" class="btn btn-secondary" style="margin-left: 10px;">Download Daily Notes</a>
+            </div>
+            
+            <div class="ai-guide">
+                <div class="ai-header">
+                    <div class="ai-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Today's AI Guidance</h3>
+                </div>
+                
+                <div class="ai-message">
+                    <p><strong>Hello! It's Day 1 of your JEE preparation journey.</strong></p>
+                    <p>Today's focus: <span class="highlight">Physics - Kinematics</span> and <span class="highlight">Chemistry - Mole Concept</span>.</p>
+                    <p>Recommendation: Start with theory, then solve 15 numerical problems from each topic. Use the provided notes for key formulas.</p>
+                    <p>Tip: Create a formula sheet for quick revision. Allocate 2 hours for Physics and 1.5 hours for Chemistry today.</p>
+                </div>
+                
+                <div class="ai-date">
+                    <i class="far fa-calendar"></i> October 5, 2023 | Day 1 of 300
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard -->
+    <section class="container">
+        <div class="dashboard">
+            <!-- Daily Notes Card -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        Today's Notes
+                    </div>
+                    <a href="#" class="btn" style="padding: 8px 15px; font-size: 14px;">View All</a>
+                </div>
+                
+                <ul class="notes-list">
+                    <li>
+                        <div>
+                            <strong>Physics: Kinematics</strong>
+                            <div style="font-size: 14px; color: var(--gray); margin-top: 5px;">Equations of motion, graphs, projectile motion</div>
+                        </div>
+                        <span class="subject-tag physics">Physics</span>
+                    </li>
+                    <li>
+                        <div>
+                            <strong>Chemistry: Mole Concept</strong>
+                            <div style="font-size: 14px; color: var(--gray); margin-top: 5px;">Atomic mass, molar mass, stoichiometry</div>
+                        </div>
+                        <span class="subject-tag chemistry">Chemistry</span>
+                    </li>
+                    <li>
+                        <div>
+                            <strong>Maths: Quadratic Equations</strong>
+                            <div style="font-size: 14px; color: var(--gray); margin-top: 5px;">Roots, discriminant, graphs of quadratics</div>
+                        </div>
+                        <span class="subject-tag maths">Maths</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Study Schedule Card -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        Today's Schedule
+                    </div>
+                    <div class="progress-circle" data-progress="25"></div>
+                </div>
+                
+                <ul class="schedule-list">
+                    <li>
+                        <div class="time">9:00 AM</div>
+                        <div>
+                            <strong>Physics Theory</strong>
+                            <div style="font-size: 14px; color: var(--gray);">Kinematics - Equations of motion</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="time">11:00 AM</div>
+                        <div>
+                            <strong>Physics Problems</strong>
+                            <div style="font-size: 14px; color: var(--gray);">Solve 15 numerical problems</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="time">2:00 PM</div>
+                        <div>
+                            <strong>Chemistry Theory</strong>
+                            <div style="font-size: 14px; color: var(--gray);">Mole concept basics</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="time">4:00 PM</div>
+                        <div>
+                            <strong>Revision & Notes</strong>
+                            <div style="font-size: 14px; color: var(--gray);">Create formula sheets</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Calendar Card -->
+            <div class="dashboard-card calendar-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        Study Calendar
+                    </div>
+                    <div style="font-weight: 600; color: var(--primary);">October 2023</div>
+                </div>
+                
+                <div class="calendar">
+                    <div class="calendar-day header">Sun</div>
+                    <div class="calendar-day header">Mon</div>
+                    <div class="calendar-day header">Tue</div>
+                    <div class="calendar-day header">Wed</div>
+                    <div class="calendar-day header">Thu</div>
+                    <div class="calendar-day header">Fri</div>
+                    <div class="calendar-day header">Sat</div>
+                    
+                    <div class="calendar-day">1</div>
+                    <div class="calendar-day">2</div>
+                    <div class="calendar-day">3</div>
+                    <div class="calendar-day">4</div>
+                    <div class="calendar-day today">5</div>
+                    <div class="calendar-day active">6</div>
+                    <div class="calendar-day active">7</div>
+                    <div class="calendar-day active">8</div>
+                    <div class="calendar-day active">9</div>
+                    <div class="calendar-day">10</div>
+                    <div class="calendar-day">11</div>
+                    <div class="calendar-day">12</div>
+                    <div class="calendar-day">13</div>
+                    <div class="calendar-day">14</div>
+                    <div class="calendar-day">15</div>
+                    <div class="calendar-day">16</div>
+                    <div class="calendar-day">17</div>
+                    <div class="calendar-day">18</div>
+                    <div class="calendar-day">19</div>
+                    <div class="calendar-day">20</div>
+                    <div class="calendar-day">21</div>
+                    <div class="calendar-day">22</div>
+                    <div class="calendar-day">23</div>
+                    <div class="calendar-day">24</div>
+                    <div class="calendar-day">25</div>
+                    <div class="calendar-day">26</div>
+                    <div class="calendar-day">27</div>
+                    <div class="calendar-day">28</div>
+                    <div class="calendar-day">29</div>
+                    <div class="calendar-day">30</div>
+                    <div class="calendar-day">31</div>
+                </div>
+                
+                <div style="margin-top: 20px; font-size: 14px; display: flex; gap: 15px;">
+                    <div><span style="display: inline-block; width: 12px; height: 12px; background-color: var(--accent); border-radius: 2px; margin-right: 5px;"></span> Today</div>
+                    <div><span style="display: inline-block; width: 12px; height: 12px; background-color: var(--primary); border-radius: 2px; margin-right: 5px;"></span> Study Days</div>
+                </div>
+            </div>
+            
+            <!-- Tips & Motivation Card -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <div class="card-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        Daily Tip
+                    </div>
+                </div>
+                
+                <div style="background-color: #FFF9E6; padding: 20px; border-radius: 10px; border-left: 4px solid var(--warning);">
+                    <h4 style="color: var(--dark); margin-bottom: 10px;">Consistency Over Intensity</h4>
+                    <p style="color: var(--dark);">For JEE preparation, studying 4-5 hours consistently every day is better than studying 12 hours one day and skipping the next. Create a sustainable routine you can maintain for the entire preparation period.</p>
+                    <div style="display: flex; align-items: center; margin-top: 15px; gap: 10px;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background-color: rgba(255, 193, 7, 0.2); display: flex; align-items: center; justify-content: center; color: #856404;">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600;">AI Suggestion:</div>
+                            <div style="font-size: 14px;">Track your daily study hours in the app</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <h4 style="color: var(--primary); margin-bottom: 10px;">Weekly Goals</h4>
+                    <ul style="padding-left: 20px;">
+                        <li>Complete Kinematics and Mole Concept</li>
+                        <li>Solve 50 practice problems</li>
+                        <li>Revise Class 11 Basic Mathematics</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>VIDYA</h3>
+                    <p>Your intelligent JEE preparation assistant providing daily guidance, study materials, and personalized schedules to help you excel in JEE Mains & Advanced.</p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background-color: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background-color: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background-color: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="#">Daily Notes</a></li>
+                        <li><a href="#">Study Calendar</a></li>
+                        <li><a href="#">Personalized Schedule</a></li>
+                        <li><a href="#">JEE Tips & Strategies</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Subjects</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Physics</a></li>
+                        <li><a href="#">Chemistry</a></li>
+                        <li><a href="#">Mathematics</a></li>
+                        <li><a href="#">Previous Year Papers</a></li>
+                        <li><a href="#">Mock Tests</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact & Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Ask the AI Tutor</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Study Plan Feedback</a></li>
+                        <li><a href="#">Report Issue</a></li>
+                        <li><a href="#">Request Feature</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Vidya - JEE Preparation Assistant. Designed to help students score well in JEE Mains & Advanced.</p>
+                <p style="margin-top: 5px; font-size: 13px;">Note: This is a prototype. Actual AI features would require backend integration.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // AI Guidance Updates
+        const aiMessages = [
+            "Remember to revise yesterday's topics before starting new ones. Spaced repetition is key for JEE preparation.",
+            "Today's focus should be on understanding concepts rather than memorization. Try to solve at least 20 problems.",
+            "Make sure to take short breaks every 45-50 minutes to maintain focus and avoid burnout.",
+            "Don't skip the easy topics. They are often high-scoring areas in JEE Mains.",
+            "Practice time management while solving problems. Set a timer to simulate exam conditions."
+        ];
+        
+        // Update AI message every 10 seconds (for demo purposes)
+        let messageIndex = 0;
+        const aiMessageElement = document.querySelector('.ai-message p:nth-child(3)');
+        
+        setInterval(() => {
+            messageIndex = (messageIndex + 1) % aiMessages.length;
+            aiMessageElement.textContent = aiMessages[messageIndex];
+        }, 10000);
+        
+        // Update progress circle based on time of day
+        function updateProgress() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            
+            // Calculate progress based on time (assuming 9 AM to 9 PM study day)
+            let progress = 0;
+            if (hours >= 9 && hours < 21) {
+                const totalMinutes = 12 * 60; // 12 hours
+                const currentMinutes = (hours - 9) * 60 + minutes;
+                progress = Math.min(100, Math.round((currentMinutes / totalMinutes) * 100));
+            } else if (hours >= 21) {
+                progress = 100;
+            }
+            
+            const progressCircle = document.querySelector('.progress-circle');
+            progressCircle.setAttribute('data-progress', progress);
+            progressCircle.style.background = `conic-gradient(var(--accent) ${progress}%, #e0e0e0 0)`;
+        }
+        
+        // Initialize progress
+        updateProgress();
+        // Update progress every minute
+        setInterval(updateProgress, 60000);
+        
+        // Set today's date in the calendar
+        const today = new Date();
+        const todayDate = today.getDate();
+        const calendarDays = document.querySelectorAll('.calendar-day:not(.header)');
+        
+        calendarDays.forEach(day => {
+            if (parseInt(day.textContent) === todayDate) {
+                day.classList.add('today');
+            }
+        });
+        
+        // Add click event to navigation
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('nav a').forEach(item => item.classList.remove('active'));
+                this.classList.add('active');
+                
+                // In a real app, this would load different content
+                alert(`In the full application, this would load the ${this.textContent} section.`);
+            });
+        });
+    </script>
+</body>
+</html>
